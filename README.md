@@ -1,6 +1,6 @@
-# MyStoreApp
+# AIXFF
 
-MyStoreApp is a simple React Native demo storefront built with [Expo](https://expo.dev/). It currently uses local dummy data and a lightweight service layer so it is easy to swap in a real backend later.
+AIXFF is a simple React Native demo storefront built with [Expo](https://expo.dev/). It currently uses local dummy data and a lightweight service layer so it is easy to swap in a real backend later.
 
 ## Getting Started
 
