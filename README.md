@@ -13,6 +13,15 @@ AIXFF is a simple React Native demo storefront built with [Expo](https://expo.de
 npm install
 ```
 
+### First-time Setup Checklist
+1. Install a recent LTS version of Node.js and the Expo CLI globally (`npm install --global expo`) if you have not already.
+2. Install project dependencies with `npm install` and ensure you have a simulator or the Expo Go app to run the project.
+3. Because there is no backend yet, the app reads from local JSON. If you need a temporary API during development, you can run a mock server:
+   ```bash
+   npx json-server --watch data/products.json --port 3001
+   ```
+   Adjust the endpoints in [`services/api.js`](services/api.js) to point to the mock server.
+
 ### Running in Development
 Start the Expo development server and choose your target platform:
 ```bash
@@ -56,6 +65,47 @@ Provide similar implementations for `getProduct` and `searchProducts`.
 - `services/` – service layer for backend calls
 - `context/` – global state (`ShopContext`)
 - `screens/` – app screens (Home, Category, Search, Product Details)
+
+## Handover Notes
+
+This project is an early demo and omits several pieces you may want before
+shipping to production. When taking over the codebase, consider the following
+items:
+
+### Backend and Data
+- There is no API server bundled with this repo. Plan to build your own backend
+  and expose endpoints for products and authentication.
+- All API helpers in [`services/api.js`](services/api.js) pull from static JSON
+  in [`data/`](data/). Replace each function with real HTTP calls, handle
+  failures and timeouts, and remove the dummy data.
+- Introduce environment variables for server URLs and secrets (e.g. with
+  [expo-constants](https://docs.expo.dev/versions/latest/sdk/constants/) or
+  [dotenv](https://www.npmjs.com/package/react-native-dotenv)).
+
+### Authentication
+- `signIn`, `signUp`, and `signOut` are placeholders. Implement these to talk to
+  your auth service and store tokens in `ShopContext` (and optionally
+  `AsyncStorage`) with appropriate refresh/expiry handling.
+
+### Testing and Linting
+- There is no testing or linting set up. Add Jest with
+  `@testing-library/react-native` for component tests and configure ESLint/
+  Prettier to enforce consistent style.
+- Include corresponding npm scripts (`test`, `lint`) and consider running them
+  in a pre-commit hook or CI job.
+
+### CI/CD and Releases
+- No CI/CD pipelines or EAS build profiles are configured. Set up GitHub Actions
+  (or your preferred service) to install dependencies, run tests/lint, and
+  trigger [EAS Build](https://docs.expo.dev/build/introduction/) for production
+  artifacts.
+
+### Feature Gaps
+- Pagination, form validation, error states, accessibility checks, and visual
+  polish are intentionally minimal. Expand them based on your product
+  requirements.
+
+Document any additional decisions in this README to help future developers.
 
 ---
 With the service layer in place, integrating a real backend is a matter of replacing a few functions, letting you focus on building the server without restructuring the app.
