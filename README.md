@@ -104,6 +104,9 @@ items:
 - Pagination, form validation, error states, accessibility checks, and visual
   polish are intentionally minimal. Expand them based on your product
   requirements.
+- DIY guidance and marketing strategies are missing. Document customization
+  steps and promotional approaches to help store owners tailor and grow their
+  apps.
 
 Document any additional decisions in this README to help future developers.
 
